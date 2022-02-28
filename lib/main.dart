@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:memorygame/ui/splash/splash_page.dart';
+import 'package:memorygame/app/routes/pages.dart';
+import 'package:memorygame/app/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Memory Game',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashPage(),
+      routes: appRoutes(),
+      initialRoute: Routes.SPLASH,
     );
   }
 }
