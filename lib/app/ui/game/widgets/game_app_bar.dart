@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:memorygame/app/ui/game/game_controller.dart';
+import 'package:provider/provider.dart';
 
 class GameAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GameAppBar({Key? key}) : super(key: key);
@@ -8,27 +10,29 @@ class GameAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<GameController>(context);
     return AppBar(
       automaticallyImplyLeading: false,
       elevation: 0.0,
       backgroundColor: Colors.transparent,
-      title: Column(
+      title: (controller.gameStarted)
+      ? Column(
         children: [
           const SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Timeleft",
                     style: TextStyle(
                       color: Colors.black,
                     ),
                   ),
                   Text(
-                    "25:00",
-                    style: TextStyle(
+                    controller.seconds.toString(),
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
@@ -69,7 +73,8 @@ class GameAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
         ],
-      ),
+      )
+      : const SizedBox.shrink()
     );
   }
 }
