@@ -11,42 +11,47 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Menu",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20,),
-            TextButton(
-              child: const Text(
-                "Iniciar",
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Menu",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
                 ),
               ),
-              onPressed: () => Navigator.of(context).pushNamed(Routes.GAME),
-            ),
-            TextButton(
-              child: const Text(
-                "Acerca de",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+              const SizedBox(height: 20,),
+              TextButton(
+                child: const Text(
+                  "Iniciar",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
+                onPressed: () => Navigator.of(context).pushNamed(Routes.GAME),
               ),
-              onPressed: () => Navigator.of(context).pushNamed(Routes.ABOUT),
-            ),
-          ],
+              TextButton(
+                child: const Text(
+                  "Acerca de",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                onPressed: () => Navigator.of(context).pushNamed(Routes.ABOUT),
+              ),
+            ],
+          ),
         ),
       ),
     );

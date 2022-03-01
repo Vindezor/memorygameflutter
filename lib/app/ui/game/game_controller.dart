@@ -52,6 +52,6 @@ class GameController extends ChangeNotifier {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    timer!.cancel();
+    timer?.cancel();
   }
 }
