@@ -1,9 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:memorygame/app/routes/routes.dart';
 
 class GameController extends ChangeNotifier {
-  static const int maxSeconds = 60;
+  GameController(this.context);
+
+  final BuildContext context;
+  static const int maxSeconds = 5;
   int _seconds = 3;
   bool _gameStarted = false;
   Timer? timer;
@@ -39,6 +43,7 @@ class GameController extends ChangeNotifier {
         _seconds--;
         notifyListeners();
       } else{
+        Navigator.of(context).pushReplacementNamed(Routes.LOSE);
         stopTimer();
       }
     });
@@ -50,6 +55,7 @@ class GameController extends ChangeNotifier {
 
   @override
   void dispose() {
+    print("disposed");
     // TODO: implement dispose
     super.dispose();
     timer?.cancel();

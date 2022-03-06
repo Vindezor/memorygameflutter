@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:memorygame/app/ui/game/game_controller.dart';
-import 'package:memorygame/app/ui/game/widgets/game_app_bar.dart';
-import 'package:memorygame/app/ui/game/widgets/game_body.dart';
+import 'package:memorygame/app/ui/game/widgets/game_app_bar/game_app_bar.dart';
+import 'package:memorygame/app/ui/game/widgets/game_body/game_body.dart';
 import 'package:provider/provider.dart';
 
 class GamePage extends StatefulWidget {
@@ -16,20 +16,25 @@ class _GamePageState extends State<GamePage> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<GameController>(
       create: (_) {
-        final controller = GameController();
+        final controller = GameController(context);
         controller.startCountDown();
         return controller;
       },
-      child: Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const GameAppBar(),
-      body: WillPopScope(
+      child: WillPopScope(
         onWillPop: () async {
-          return true;
+          return false;
         },
-        child: const GameBody()
+        child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: const GameAppBar(),
+        body: WillPopScope(
+          onWillPop: () async {
+            return true;
+          },
+          child: const GameBody()
+        ),
+          ),
       ),
-    ),
     );
   }
 }

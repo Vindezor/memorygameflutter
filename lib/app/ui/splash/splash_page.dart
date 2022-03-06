@@ -13,7 +13,10 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     Future.delayed(
       const Duration(seconds: 5)
-    ).then((_) => Navigator.of(context).pushReplacementNamed(Routes.HOME)); 
+    ).then(
+      (_) => Navigator.of(context).pushReplacementNamed(Routes.HOME)
+    );
+    
     return WillPopScope(
       onWillPop: () async {
         return false;
