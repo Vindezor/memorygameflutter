@@ -33,7 +33,7 @@ class GameController extends ChangeNotifier {
       }
     });
   }
-
+//1
   void startTimer(){
     _gameStarted = true;
     _seconds = maxSeconds;
