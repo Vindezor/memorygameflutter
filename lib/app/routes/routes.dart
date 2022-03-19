@@ -4,4 +4,5 @@ abstract class Routes {
   static const ABOUT = "/about";
   static const GAME = "/game";
   static const LOSE = "/lose";
+  static const WIN = "/win";
 }
