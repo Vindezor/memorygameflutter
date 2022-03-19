@@ -17,7 +17,7 @@ class GameController extends ChangeNotifier {
   List<MemoryBox> memoryItems = [];
   List<GlobalKey<MemoryBoxState>> keys = [];
   bool _canSnap = true;
-
+  int correctAnswers = 0;
   int get seconds {
     return _seconds;
   }
@@ -57,7 +57,10 @@ class GameController extends ChangeNotifier {
         _seconds--;
         notifyListeners();
       } else{
-        Navigator.of(context).pushReplacementNamed(Routes.LOSE);
+        Navigator.of(context).pushReplacementNamed(
+          Routes.LOSE,
+          arguments: {'score': score}
+        );
         stopTimer();
       }
     });
@@ -79,33 +82,58 @@ class GameController extends ChangeNotifier {
   }
 
   void selection(GlobalKey<MemoryBoxState> key){
-    if(keys.length < 2){
-      if(key.currentState!.widget.data == "Bomb"){
-        _canSnap = false;
-        Future.delayed(
-          const Duration(seconds: 2)
-        ).then(
-          (_) => Navigator.pushReplacementNamed(context, Routes.LOSE)
-        );
-      } else{
-        keys.add(key);
-        if(keys.length == 2){
+    if(!keys.contains(key)){
+      if(keys.length < 2){
+        if(key.currentState!.widget.data == "Bomb"){
           _canSnap = false;
-          checkKeys();
+          Future.delayed(
+            const Duration(seconds: 2)
+          ).then(
+            (_) => Navigator.of(context).pushReplacementNamed(
+              Routes.LOSE,
+              arguments: {'score': score}
+            )
+          );
+        } else{
+          keys.add(key);
+          if(keys.length == 2){
+            _canSnap = false;
+            checkKeys();
+          }
         }
       }
+    } else {
+      keys.clear();
     }
   }
 
   void checkKeys(){
     if(keys[0].currentState!.widget.data == keys[1].currentState!.widget.data){
-      _score++;
+      _score += 3;
       keys[0].currentState!.setCanSnapThis = false;
       keys[1].currentState!.setCanSnapThis = false;
       keys.clear();
+      correctAnswers++;
+      if(correctAnswers == 4){
+        if(score > 0){
+          Navigator.of(context).pushReplacementNamed(
+            Routes.WIN,
+            arguments: {
+              'score': score
+            }
+          );
+        } else {
+          Navigator.of(context).pushReplacementNamed(
+            Routes.LOSE,
+            arguments: {
+              'score': score
+            }
+          );
+        }
+      }
       _canSnap = true;
     } else{
-      Future.delayed(const Duration(seconds: 2)).then((_) {
+      Future.delayed(const Duration(seconds: 1)).then((_) {
         keys[0].currentState!.setIsActive = false;
         keys[1].currentState!.setIsActive = false;
         _score--;
