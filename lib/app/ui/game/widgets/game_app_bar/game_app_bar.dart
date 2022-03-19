@@ -55,16 +55,16 @@ class GameAppBar extends StatelessWidget implements PreferredSizeWidget {
               //   ],
               // ),
               Column(
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Score",
                     style: TextStyle(
                       color: Colors.black,
                     ),
                   ),
                   Text(
-                    "0",
-                    style: TextStyle(
+                    controller.score.toString(),
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
