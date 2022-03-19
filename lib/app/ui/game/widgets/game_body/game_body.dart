@@ -12,58 +12,52 @@ class GameBody extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     final controller = Provider.of<GameController>(context);
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => MemoryBoxController(),
-        )
-      ],
-      child: (controller.gameStarted)
-        ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: height * 0.10,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    MemoryBox(),
-                    MemoryBox(),
-                    MemoryBox(),
-                  ],
-                ),
-                SizedBox(height: height * 0.03,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    MemoryBox(),
-                    MemoryBox(),
-                    MemoryBox(),
-                  ],
-                ),
-                SizedBox(height: height * 0.03,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    MemoryBox(),
-                    MemoryBox(),
-                    MemoryBox(),
-                  ],
-                ),
-              ],
-            ),
-          )
-        : Center(
-            child: Text(
-              (controller.seconds > 0)
-              ? controller.seconds.toString()
-              : "¡Comenzemos!",
-              style: const TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold
+    final boxController = Provider.of<MemoryBoxController>(context);
+    return (controller.gameStarted)
+      ? Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: height * 0.10,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  boxController.memoryItems[0],
+                  boxController.memoryItems[1],
+                  boxController.memoryItems[2],
+                ],
               ),
+              SizedBox(height: height * 0.03,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  boxController.memoryItems[3],
+                  boxController.memoryItems[4],
+                  boxController.memoryItems[5],
+                ],
+              ),
+              SizedBox(height: height * 0.03,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  boxController.memoryItems[6],
+                  boxController.memoryItems[7],
+                  boxController.memoryItems[8],
+                ],
+              ),
+            ],
+          ),
+        )
+      : Center(
+          child: Text(
+            (controller.seconds > 0)
+            ? controller.seconds.toString()
+            : "¡Comenzemos!",
+            style: const TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold
             ),
           ),
-    );
+        );
   }
 }

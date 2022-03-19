@@ -48,7 +48,7 @@ class _LoseGamePageState extends State<LoseGamePage> {
                     color: Colors.black,
                   ),
                 ),
-                onPressed: () => Navigator.of(context).pushNamed(Routes.HOME),
+                onPressed: () => Navigator.pop(context),
               ),
             ],
           )

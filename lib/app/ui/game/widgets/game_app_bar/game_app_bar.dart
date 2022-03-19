@@ -38,22 +38,22 @@ class GameAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ],
               ),
-              Column(
-                children: const [
-                  Text(
-                    "Level",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                  Text(
-                    "1",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
+              // Column(
+              //   children: const [
+              //     Text(
+              //       "Level",
+              //       style: TextStyle(
+              //         color: Colors.black,
+              //       ),
+              //     ),
+              //     Text(
+              //       "1",
+              //       style: TextStyle(
+              //         color: Colors.black,
+              //       ),
+              //     ),
+              //   ],
+              // ),
               Column(
                 children: const [
                   Text(

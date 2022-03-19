@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class MemoryBox extends StatefulWidget {
-  const MemoryBox({ Key? key }) : super(key: key);
+  final String data;
+  const MemoryBox({
+    required this.data,
+    Key? key 
+  }) : super(key: key);
 
   @override
   State<MemoryBox> createState() => _MemoryBoxState();
@@ -34,10 +38,10 @@ class _MemoryBoxState extends State<MemoryBox> {
           borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
         child: (_isActive)
-        ? const Center(
+        ? Center(
           child: Text(
-            "Data",
-            style: TextStyle(
+            widget.data,
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold
             ),
