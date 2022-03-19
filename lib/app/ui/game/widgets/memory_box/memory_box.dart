@@ -1,28 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:memorygame/app/ui/game/game_controller.dart';
+import 'package:provider/provider.dart';
 
 class MemoryBox extends StatefulWidget {
   final String data;
+  final GlobalKey<MemoryBoxState> keyx;
   const MemoryBox({
     required this.data,
-    Key? key 
-  }) : super(key: key);
+    required this.keyx
+  }) : super(key: keyx);
 
   @override
-  State<MemoryBox> createState() => _MemoryBoxState();
+  State<MemoryBox> createState() => MemoryBoxState();
 }
 
-class _MemoryBoxState extends State<MemoryBox> {
+class MemoryBoxState extends State<MemoryBox> {
   bool _isActive = false;
+  bool _canSnapThis = true;
+  bool get isActive{
+    return _isActive;
+  }
+
+  set setIsActive(bool value){
+    setState(() {
+      _isActive = value;
+    });
+  }
+
+  set setCanSnapThis(bool value){
+    _canSnapThis = value;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<GameController>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return InkWell(
       onTap: () {
-        setState(() {
-          _isActive = !_isActive;
-        });
+        if(controller.canSnap && _canSnapThis){
+          controller.selection(widget.keyx);
+          setState(() {
+            _isActive = !_isActive;
+          });
+        }
       },
       child: Ink(
         width: width * 0.25,
