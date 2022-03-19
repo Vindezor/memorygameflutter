@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:memorygame/app/ui/game/game_controller.dart';
 import 'package:provider/provider.dart';
@@ -60,12 +61,13 @@ class MemoryBoxState extends State<MemoryBox> {
         ),
         child: (_isActive)
         ? Center(
-          child: Text(
+          child: AutoSizeText(
             widget.data,
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold
             ),
+            maxLines: 1,
             )
           )
         : const SizedBox.shrink(),
